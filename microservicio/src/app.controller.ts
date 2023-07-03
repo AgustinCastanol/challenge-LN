@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { EventPattern } from '@nestjs/microservices';
+import { EventPattern, RpcException } from '@nestjs/microservices';
 import { ProductService } from './product/product.service';
+import { Product } from './entities/product.entity';
 
 @Controller()
 export class AppController {
@@ -12,12 +13,27 @@ export class AppController {
 
   @EventPattern('actualizar_producto')
   async actualizar(data: any) {
-    return this.productService.update(data.id, data);
+    const categoria = await this.productService.findCategory(data.categoria);
+    if (!categoria) throw new RpcException('Categoria no existe');
+    const estado = await this.productService.findState(data.estado);
+    if (!estado) throw new RpcException('Estado no existe');
+    const product = new Product();
+    product.id = data.id;
+    product.sku = data.sku;
+    product.nombre_producto = data.nombre;
+    product.precio = data.precio;
+    product.estado = estado;
+    product.id_categoria = categoria.id;
+    product.descripcion = data.descripcion;
+    product.id_estado = estado.id;
+    return this.productService.update(data.id, product);
   }
 
   @EventPattern('eliminar_producto')
   async eliminar(data: any) {
-    console.log('eliminar_producto', data);
+    const product = await this.productService.findOne(data.id);
+    if (!product) throw new RpcException('Producto no existe');
+    return this.productService.remove(data.id);
   }
 
   @EventPattern('obtener_todos_productos')
@@ -27,7 +43,8 @@ export class AppController {
 
   @EventPattern('obtener_producto_por_id')
   async obtenerPorId(id: string) {
-    console.log('obtener_producto_por_id', id);
-    return { id };
+    const product = await this.productService.findOne(id);
+    if (!product) throw new RpcException('Producto no existe');
+    return product;
   }
 }

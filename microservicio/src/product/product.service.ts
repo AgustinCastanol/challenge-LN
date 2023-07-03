@@ -15,13 +15,27 @@ export class ProductService {
   ) {}
 
   async findAll(): Promise<Product[]> {
-    return this.productsRepository.find();
+    return this.productsRepository.find({
+      relations: ['categoria', 'estado'],
+    });
+  }
+
+  async findCategory(categoria: string): Promise<Category> {
+    return this.categoryRepository.findOne({
+      where: { nombre: categoria },
+    });
+  }
+  async findState(estado: string): Promise<Estado> {
+    return this.estadoRepository.findOne({
+      where: { nombre: estado },
+    });
   }
 
   findOne(id: string): Promise<Product> {
     const numberId = parseInt(id);
     return this.productsRepository.findOne({
       where: { id: numberId },
+      relations: ['categoria', 'estado'],
     });
   }
 
@@ -38,6 +52,7 @@ export class ProductService {
     await this.productsRepository.update(id, product);
     return this.productsRepository.findOne({
       where: { id: numberId },
+      relations: ['categoria', 'estado'],
     });
   }
 }

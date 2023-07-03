@@ -9,12 +9,22 @@ export class AuthKeyFilter<T> implements ExceptionFilter {
     const status = exception['status'] || 500;
     const message = exception['message'] || 'Error interno del servidor';
     console.log(status, message, 'AuthKeyFilter');
-    console.log(exception);
+
+    if (status === 'error') {
+      const error = exception['error'];
+      return response.status(400).json({
+        statusCode: status,
+        timestamp: new Date().toISOString(),
+        path: request.url,
+        message,
+        error,
+      });
+    }
     response.status(status).json({
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
-      message: message,
+      message,
     });
   }
 }

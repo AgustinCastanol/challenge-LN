@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class ActualizarDto {
   @IsNotEmpty()
@@ -14,8 +14,8 @@ export class ActualizarDto {
   @IsNumber()
   precio: number;
 
-  @IsBoolean()
-  estado: boolean;
+  @IsString()
+  estado: string;
 
   @IsString()
   categoria: string;
