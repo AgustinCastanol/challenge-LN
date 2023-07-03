@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "c634bbcf-32f1-454a-933d-0009747e6f95",
+		"name": "CH-LN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17743533"
+	},
+	"item": [
+		{
+			"name": "Obtener todos los productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/productos/",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener producto por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/productos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1,\r\n    \"sku\":1,\r\n    \"nombre\":\"hola mundo\",\r\n    \"estado\":true,\r\n    \"categoria\":\"escritura\",\r\n    \"descripcion\":\"holamundosoyla descripcion\",\r\n    \"precio\":13123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/productos/",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
