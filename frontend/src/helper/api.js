@@ -32,8 +32,22 @@ export function createProduct(data) {
 
 export function updateProduct(id, data) {
     return request({
-        url: `/productos/${id}`,
+        url: `/productos/`,
         method: 'post',
         data,
+    })
+}
+
+export function getCategories() {
+    return request({
+        url: '/productos/categorias',
+        method: 'get',
+    })
+}
+
+export function getStates() {
+    return request({
+        url: '/productos/estados',
+        method: 'get',
     })
 }

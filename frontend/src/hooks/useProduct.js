@@ -8,5 +8,5 @@ export function useProduct() {
     throw new Error('useProduct must be used within a ProductProvider');
   }
 
-  return [context.products,context.loading ,context.addProduct];
+  return [context.products,context.loading ,context.addProduct, context.deleteProduct,context.modifyProduct];
 }

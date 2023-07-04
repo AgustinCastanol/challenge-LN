@@ -27,17 +27,21 @@ export const ProductsProvider = ({ children }) => {
     }
   }, []);
   const addProduct = (product) => {
-    return setProducts([...products, product]);
+    return setProducts(prevState => [...prevState, product]);
   }
-  const deleteProduct = (id) => {
-    return setProducts(products.filter(product => product.id !== id));
+  const deleteProduct = async (id) => {
+    await api.deleteProduct(id);
+    return setProducts(prevState => prevState.filter(product => product.id !== id));
   }
-  const modifyProduct = (id, updatedProduct) => {
-    return setProducts(products.map(product => product.id === id ? updatedProduct : product));
+  const modifyProduct = async (id, updatedProduct) => {
+    console.log(typeof updatedProduct.precio)
+    const newProduct = await api.updateProduct(id, updatedProduct);
+    console.log(products)
+    return setProducts(prevState => prevState.map(product => product.id === id ? newProduct : product));
   }
 
   return (
-    <ProductsContext.Provider value={{ products,loading,deleteProduct,modifyProduct,addProduct}}>
+    <ProductsContext.Provider value={{ products,loading,addProduct,deleteProduct,modifyProduct}}>
       {children}
     </ProductsContext.Provider>
   )

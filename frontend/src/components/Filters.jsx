@@ -4,12 +4,11 @@ import { Typography, Slider, FormControl, InputLabel, Select, MenuItem } from '@
 import { useFilters } from '../hooks/useFilters';
 // eslint-disable-next-line react/prop-types
 export function Filters() {
-  const [filters,setFilters] = useFilters();
-
+  const [filters,setFilters, valueFilters] = useFilters();
 
   const minPriceFilterId = useId();
   const categoryFilterId = useId();
-
+  const stateFilterId = useId();
   const handleChangeMinPrice = (event) => {
     setFilters(prevState => ({ ...prevState, minPrice: event.target.value }));
   };
@@ -23,14 +22,14 @@ export function Filters() {
         Precio
       </Typography>
       <Slider
-        value={filters.minPrice}
+        value={valueFilters.minPrice}
         onChange={handleChangeMinPrice}
         min={0}
         max={10000}
         aria-labelledby={minPriceFilterId}
         id={minPriceFilterId}
       />
-      <Typography>{filters.minPrice}</Typography>
+      <Typography>{valueFilters.minPrice}</Typography>
     </div>
     <div className='filters-category'>
       <FormControl>
@@ -38,12 +37,27 @@ export function Filters() {
         <Select
           labelId={categoryFilterId}
           id={categoryFilterId}
-          value={filters.category}
+          value={valueFilters.category}
           onChange={handlerChangeCategory}
         >
           <MenuItem value="all">Todos</MenuItem>
           <MenuItem value="Escritura">Escritura</MenuItem>
           <MenuItem value="Deportes">Deportes</MenuItem>
+        </Select>
+      </FormControl>
+    </div>
+    <div className='filters-state'>
+      <FormControl>
+        <InputLabel id={stateFilterId}>Estado</InputLabel>
+        <Select
+          labelId={stateFilterId}
+          id={stateFilterId}
+          value={valueFilters.state}
+          onChange={(event) => setFilters(prevState => ({ ...prevState, state: event.target.value }))}
+        >
+          <MenuItem value="all">Todos</MenuItem>
+          <MenuItem value="Habilitado">Habilitado</MenuItem>
+          <MenuItem value="Deshabilitado">Deshabilitado</MenuItem>
         </Select>
       </FormControl>
     </div>

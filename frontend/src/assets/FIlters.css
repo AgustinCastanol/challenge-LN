@@ -29,3 +29,17 @@
   color: #f1f1f1 !important;
   margin-bottom: 1rem !important;
 }
+.filters-state{
+  background-color: rgb(87, 87, 87);
+}
+.filters-state>div{
+  width: auto;
+  color: #f1f1f1 !important;
+}
+.filters-state>div>div{
+  color: #f1f1f1 !important;
+}
+.filters-state>div>label{
+  color: #f1f1f1 !important;
+  margin-bottom: 1rem !important;
+}

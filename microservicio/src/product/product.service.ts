@@ -55,4 +55,10 @@ export class ProductService {
       relations: ['categoria', 'estado'],
     });
   }
+  async findAllCategories(): Promise<Category[]> {
+    return this.categoryRepository.find();
+  }
+  async findAllStates(): Promise<Estado[]> {
+    return this.estadoRepository.find();
+  }
 }

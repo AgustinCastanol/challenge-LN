@@ -47,4 +47,31 @@ export class AppController {
     if (!product) throw new RpcException('Producto no existe');
     return product;
   }
+
+  @EventPattern('obtener_categorias')
+  async obtenerCategorias() {
+    return await this.productService.findAllCategories();
+  }
+
+  @EventPattern('obtener_estados')
+  async obtenerEstados() {
+    return await this.productService.findAllStates();
+  }
+
+  @EventPattern('crear_producto')
+  async crear(data: any) {
+    const categoria = await this.productService.findCategory(data.categoria);
+    if (!categoria) throw new RpcException('Categoria no existe');
+    const estado = await this.productService.findState(data.estado);
+    if (!estado) throw new RpcException('Estado no existe');
+    const product = new Product();
+    product.sku = data.sku;
+    product.nombre_producto = data.nombre;
+    product.precio = data.precio;
+    product.estado = estado;
+    product.id_categoria = categoria.id;
+    product.descripcion = data.descripcion;
+    product.id_estado = estado.id;
+    return this.productService.create(product);
+  }
 }

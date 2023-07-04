@@ -8,8 +8,8 @@ export class AuthKeyFilter<T> implements ExceptionFilter {
     const request = ctx.getRequest();
     const status = exception['status'] || 500;
     const message = exception['message'] || 'Error interno del servidor';
-    console.log(status, message, 'AuthKeyFilter');
-
+    console.log(status, message, 'Filter');
+    console.log(exception, 'Filter');
     if (status === 'error') {
       const error = exception['error'];
       return response.status(400).json({
