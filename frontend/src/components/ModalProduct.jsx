@@ -1,7 +1,7 @@
 import { Modal, Typography, TextField, Button  } from "@mui/material"
 import PropTypes from 'prop-types';
 
-export function ModalProduct ({children,open,handleClose,handleInputChange,handleModifyClick, updatedProduct}){
+export function ModalProduct ({open,handleClose,handleInputChange,handleModifyClick, updatedProduct}){
   return (
     <Modal open={open} onClose={handleClose}>
     <div style={{ margin: 'auto', width: 300, height: 300, backgroundColor: 'white', padding: 16 }}>
@@ -40,7 +40,6 @@ export function ModalProduct ({children,open,handleClose,handleInputChange,handl
   )
 }
 ModalProduct.propTypes = {
-  children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
