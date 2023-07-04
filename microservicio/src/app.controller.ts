@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EventPattern, RpcException } from '@nestjs/microservices';
 import { ProductService } from './product/product.service';
