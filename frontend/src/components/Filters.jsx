@@ -2,10 +2,11 @@ import '../assets/Filters.css'
 import { useId } from 'react';
 import { Typography, Slider, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useFilters } from '../hooks/useFilters';
+import { useDropdown } from '../hooks/useDropdown';
 // eslint-disable-next-line react/prop-types
 export function Filters() {
-  const [filters,setFilters, valueFilters] = useFilters();
-
+  const [,setFilters, valueFilters] = useFilters();
+  const [valuesCategory,valuesState] = useDropdown(); //este hook se deberia de llamar formValues
   const minPriceFilterId = useId();
   const categoryFilterId = useId();
   const stateFilterId = useId();
@@ -41,8 +42,11 @@ export function Filters() {
           onChange={handlerChangeCategory}
         >
           <MenuItem value="all">Todos</MenuItem>
-          <MenuItem value="Escritura">Escritura</MenuItem>
-          <MenuItem value="Deportes">Deportes</MenuItem>
+          {
+            valuesCategory.map((value) => (
+              <MenuItem key={value.label} value={value.label}>{value.label}</MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
     </div>
@@ -56,8 +60,11 @@ export function Filters() {
           onChange={(event) => setFilters(prevState => ({ ...prevState, state: event.target.value }))}
         >
           <MenuItem value="all">Todos</MenuItem>
-          <MenuItem value="Habilitado">Habilitado</MenuItem>
-          <MenuItem value="Deshabilitado">Deshabilitado</MenuItem>
+          {
+            valuesState.map((value) => (
+              <MenuItem key={value.label} value={value.label}>{value.label}</MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
     </div>

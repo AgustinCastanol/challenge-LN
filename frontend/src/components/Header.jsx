@@ -6,7 +6,7 @@ export function Header() {
     <header>
       <h1>Productos</h1>
       <div className="container-header">
-          <ProductCreator />
+        <ProductCreator  />
         <Filters />
       </div>
     </header>

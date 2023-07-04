@@ -1,3 +1,4 @@
+import '../assets/ProductCreator.css'
 import { Button } from '@mui/material'
 import { useState } from 'react';
 import {ModalProduct} from './ModalProduct'
@@ -61,7 +62,7 @@ export function ProductCreator (){
 
   return(
     <>
-    <Button variant="contained" color="primary" onClick={handleOpen}>
+    <Button className='button_products_creator' variant="contained" color="primary" onClick={handleOpen}>
       Crear Producto
     </Button>
     <ModalProduct 
