@@ -1,0 +1,31 @@
+ .filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.filters-price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  width: 200px;
+  gap: 1rem;
+}
+.filters-category{
+  background-color: rgb(87, 87, 87);
+}
+.filters-category>div{
+  width: auto;
+  color: #f1f1f1 !important;
+}
+.filters-category>div>div{
+  color: #f1f1f1 !important;
+}
+.filters-category>div>label{
+  color: #f1f1f1 !important;
+  margin-bottom: 1rem !important;
+}

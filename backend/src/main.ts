@@ -4,6 +4,7 @@ import { AuthKeyFilter } from './errors/errors.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalFilters(new AuthKeyFilter());
   await app.listen(3001);
 }

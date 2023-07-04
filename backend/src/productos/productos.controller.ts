@@ -7,7 +7,6 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
-import { ProductosService } from './productos.service';
 import { obtenerPorId } from './dto/obtenerPorId.dto';
 import { ValidationPipe } from './pipe/validations.pipe';
 import { ActualizarDto } from './dto/actualizar.dto';
