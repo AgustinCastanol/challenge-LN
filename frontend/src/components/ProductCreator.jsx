@@ -1,7 +1,10 @@
 import { Button } from '@mui/material'
 import { useState } from 'react';
 import {ModalProduct} from './ModalProduct'
+import { useProduct } from '../hooks/useProduct';
+import { randomId, validateForm } from '../helper/utils';
 export function ProductCreator (){
+  const [,,addProduct] = useProduct();
   const [updatedProduct, setUpdatedProduct] = useState({
     nombre_producto: "",
     sku: "",
@@ -25,8 +28,20 @@ export function ProductCreator (){
   }
   const handleModifyClick = () => {
     try {
-      console.log(updatedProduct)
+      const errors = validateForm(updatedProduct)
+      if(errors == null){
+        return alert("Error en los datos ingresados, por favor vuelva a ingresarlos");//en este punto deberia de realizar un popup con los errores
+      }
       setOpen(false);
+      addProduct({
+        id: randomId(),
+        nombre: updatedProduct.nombre_producto,
+        sku: parseInt(updatedProduct.sku),
+        precio: parseInt(updatedProduct.precio),
+        categoria:updatedProduct.categoria.nombre,
+        descripcion: updatedProduct.descripcion,
+        estado:updatedProduct.estado.nombre,
+      });
       setUpdatedProduct({
         nombre_producto: "",
         sku: "",

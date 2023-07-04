@@ -30,10 +30,10 @@ export class AppController {
   }
 
   @EventPattern('eliminar_producto')
-  async eliminar(data: any) {
-    const product = await this.productService.findOne(data.id);
+  async eliminar(id: string) {
+    const product = await this.productService.findOne(id);
     if (!product) throw new RpcException('Producto no existe');
-    return this.productService.remove(data.id);
+    return await this.productService.remove(id);
   }
 
   @EventPattern('obtener_todos_productos')
@@ -72,6 +72,7 @@ export class AppController {
     product.id_categoria = categoria.id;
     product.descripcion = data.descripcion;
     product.id_estado = estado.id;
-    return this.productService.create(product);
+    const newProduct = await this.productService.create(product);
+    return await this.productService.findOne(`${newProduct.id}`);
   }
 }

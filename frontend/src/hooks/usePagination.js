@@ -8,5 +8,5 @@ export function usePagination() {
     throw new Error('usePagination must be used within a ProductProvider');
   }
 
-  return [context.productsSize,context.pagination];
+  return [context.productsSize,context.currentPage,context.pagination];
 }

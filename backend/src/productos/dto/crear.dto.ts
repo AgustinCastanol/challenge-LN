@@ -2,9 +2,6 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CrearDto {
   @IsNumber()
-  id: number;
-
-  @IsNumber()
   sku: number;
 
   @IsString()

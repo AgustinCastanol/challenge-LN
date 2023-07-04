@@ -16,15 +16,15 @@ export function getProductDetail(id) {
 
 export function deleteProduct(id) {
     return request({
-        url: `/productos/`,
-        method: 'delete',
+        url: `/productos/delete`,
+        method: 'post',
         data: {id},
     })
 }
 
 export function createProduct(data) {
     return request({
-        url: '/productos',
+        url: '/productos/crear',
         method: 'post',
         data,
     })

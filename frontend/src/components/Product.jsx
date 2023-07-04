@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { ModalProduct } from './ModalProduct';
 import { useProduct } from '../hooks/useProduct';
 import '../assets/Product.css'
-import { DropDownProvider } from '../context/dropdown';
 export function Producto({ producto }) {
   const [open, setOpen] = useState(false);
   const [, , , deleteProduct, modifyProduct] = useProduct();
@@ -76,9 +75,7 @@ export function Producto({ producto }) {
           </div>
         </CardContent>
       </Card>
-      <DropDownProvider>
         <ModalProduct title='Modificar Producto' open={open} handleOpen={handleOpen} handleClose={handleClose} handleInputChange={handleInputChange} handleModifyClick={handleModifyClick} updatedProduct={updatedProduct} />
-      </DropDownProvider>
     </>
   )
 

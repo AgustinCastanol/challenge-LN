@@ -45,9 +45,11 @@ export class ProductosController {
     return await this.microserviceServices.obtenerTodos(page, limit);
   }
 
-  @Delete('')
+  @Post('/delete')
+  @UsePipes(new ValidationPipe())
   async eliminar(@Body() body: EliminarDto) {
-    return await this.microserviceServices.eliminar(body);
+    const { id } = body;
+    return await this.microserviceServices.eliminar(id);
   }
 
   @Get(':id')

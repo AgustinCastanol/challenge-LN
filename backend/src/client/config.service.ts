@@ -8,8 +8,8 @@ export class ConfigService {
     return this.client.send('actualizar_producto', data);
   }
 
-  async eliminar(data: any) {
-    return this.client.send('eliminar_producto', data);
+  async eliminar(id: string) {
+    return this.client.send('eliminar_producto', id);
   }
 
   async obtenerTodos(page: number | string, limit: number | string) {
