@@ -7,6 +7,7 @@ import {
   Post,
   UsePipes,
   Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { obtenerPorId } from './dto/obtenerPorId.dto';
 import { ValidationPipe } from './pipe/validations.pipe';
@@ -31,11 +32,15 @@ export class ProductosController {
   @Get('')
   async obtenerTodos(@Query() query: any) {
     let { page, limit } = query;
-    if (page == undefined) {
-      page = 0;
+    page = page ? parseInt(page) : 1;
+    limit = limit ? parseInt(limit) : 10;
+
+    if (limit <= 0) {
+      throw new BadRequestException('Limit debe ser mayor a 0');
     }
-    if (limit == undefined) {
-      limit = 10;
+
+    if (page < 1) {
+      throw new BadRequestException('Page debe ser mayor a 1');
     }
     return await this.microserviceServices.obtenerTodos(page, limit);
   }

@@ -37,8 +37,8 @@ export class AppController {
   }
 
   @EventPattern('obtener_todos_productos')
-  async obtenerTodos() {
-    return await this.productService.findAll();
+  async obtenerTodos(data: { page: number; limit: number }) {
+    return await this.productService.findAll(data.page, data.limit);
   }
 
   @EventPattern('obtener_producto_por_id')

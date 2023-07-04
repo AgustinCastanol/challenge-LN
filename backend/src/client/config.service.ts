@@ -13,8 +13,7 @@ export class ConfigService {
   }
 
   async obtenerTodos(page: number | string, limit: number | string) {
-    console.log('page', page, limit);
-    return this.client.send('obtener_todos_productos', '');
+    return this.client.send('obtener_todos_productos', { page, limit });
   }
   async obtenerPorId(id: string) {
     return this.client.send('obtener_producto_por_id', id);

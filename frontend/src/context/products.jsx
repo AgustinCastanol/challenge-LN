@@ -6,26 +6,27 @@ export const ProductsContext = createContext();
 export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [productsSize, setProductsSize] = useState(0);
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
-
-    const fetchProductos = async () => {
-      try {
-        const response = await api.getProductList(signal);
-        setProducts(response);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error al obtener los productos:', error);
-      }
-    };
 
     fetchProductos();
     return () => {
       controller.abort();
     }
   }, []);
+
+  const fetchProductos = async (page=1,limit=100 ) => {
+    try {
+      const response = await api.getProductList({page,limit});
+      setProducts(response);
+      setLoading(false);
+      setProductsSize(response.length);
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+    }
+  };
+
   const addProduct = (product) => {
     return setProducts(prevState => [...prevState, product]);
   }
@@ -40,10 +41,16 @@ export const ProductsProvider = ({ children }) => {
     return setProducts(prevState => prevState.map(product => product.id === id ? newProduct : product));
   }
 
+  const pagination = (page, limit) => {
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const productsPagination = fetchProductos(startIndex, endIndex);
+    return setProducts(productsPagination);
+  }
+
   return (
-    <ProductsContext.Provider value={{ products,loading,addProduct,deleteProduct,modifyProduct}}>
+    <ProductsContext.Provider value={{ products,loading,addProduct,deleteProduct,modifyProduct,productsSize,pagination}}>
       {children}
     </ProductsContext.Provider>
   )
 }
-

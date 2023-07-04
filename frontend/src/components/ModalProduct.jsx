@@ -6,8 +6,12 @@ import { useDropdown } from "../hooks/useDropdown";
 export function ModalProduct({title, open, handleClose, handleInputChange, handleModifyClick, updatedProduct }) {
   const [optionsCategory,optionsStates] = useDropdown();
 
-  const onSelect = (option) => {
-    console.log(option);
+  const onSelectCategory = (option) => {
+    updatedProduct.categoria.nombre = option;
+  }
+
+  const onSelectState = (option) => {
+    updatedProduct.estado.nombre = option;
   };
   return (
     <Modal className="container-modal" open={open} onClose={handleClose}>
@@ -34,8 +38,8 @@ export function ModalProduct({title, open, handleClose, handleInputChange, handl
             value={updatedProduct.precio}
             onChange={handleInputChange}
           />
-          <Dropdown options={optionsCategory} onSelect={onSelect} labelOption="Seleccionar una Categoria" title="categoria" initialValue={updatedProduct.categoria.nombre}/>
-          <Dropdown options={optionsStates} onSelect={onSelect} labelOption="Seleccionar un Estado" title="estado" initialValue={updatedProduct.estado.nombre}/>
+          <Dropdown options={optionsCategory} onSelect={onSelectCategory} labelOption="Seleccionar una Categoria" title="categoria" initialValue={updatedProduct.categoria.nombre}/>
+          <Dropdown options={optionsStates} onSelect={onSelectState} labelOption="Seleccionar un Estado" title="estado" initialValue={updatedProduct.estado.nombre}/>
           <TextField
             className="input-descripcion"
             label="Descripción"

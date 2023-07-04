@@ -14,9 +14,12 @@ export class ProductService {
     @InjectRepository(Estado) private estadoRepository: Repository<Estado>,
   ) {}
 
-  async findAll(): Promise<Product[]> {
+  async findAll(page: number, limit: number): Promise<Product[]> {
+    const skip = (page - 1) * limit;
     return this.productsRepository.find({
       relations: ['categoria', 'estado'],
+      skip: skip,
+      take: limit,
     });
   }
 
