@@ -1,5 +1,4 @@
 version: '3.1'
-# crear un docker compose con postgresql
 
 services:
   db:
@@ -15,5 +14,27 @@ services:
       - ./data:/var/lib/postgresql/data
       - ./database/data.sql:/docker-entrypoint-initdb.d/data.sql
       - ./database/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+#     networks:
+#       - backend
+#   admin:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     ports:
+#       - 3001:3001
+#     networks:
+#       - backend
 
+
+#   microservice:
+#     build:
+#       context: ./microservicio
+#       dockerfile: Dockerfile
+#     ports:
+#       - 3000:3000
+#     networks:
+#       - backend
+
+# networks:
+#   backend:
     

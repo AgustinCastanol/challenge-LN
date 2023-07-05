@@ -6,9 +6,6 @@ async function bootstrap() {
     AppModule,
     {
       transport: Transport.TCP,
-      options: {
-        host: process.env.HOST || 'localhost',
-      },
     },
   );
   await app.listen();

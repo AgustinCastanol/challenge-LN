@@ -8,7 +8,6 @@ import { ConfigService } from './config.service';
       {
         name: 'NEST_SERVICE',
         transport: Transport.TCP,
-        // options: { port: 3001 },
       },
     ]),
   ],
