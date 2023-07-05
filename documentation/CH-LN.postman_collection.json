@@ -31,14 +31,24 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3001/productos/1",
+					"raw": "localhost:3001/productos/?limit=10&page=1",
 					"host": [
 						"localhost"
 					],
 					"port": "3001",
 					"path": [
 						"productos",
-						"1"
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
 					]
 				}
 			},
@@ -51,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":1,\r\n    \"sku\":1,\r\n    \"nombre\":\"hola mundo\",\r\n    \"estado\":true,\r\n    \"categoria\":\"escritura\",\r\n    \"descripcion\":\"holamundosoyla descripcion\",\r\n    \"precio\":13123\r\n}",
+					"raw": "{\r\n    \"id\":4,\r\n    \"sku\":2,\r\n    \"nombre\":\"Pelota\",\r\n    \"estado\":\"Habilitado\",\r\n    \"categoria\":\"Deportes\",\r\n    \"descripcion\":\"Pelota deporte cuero boca\",\r\n    \"precio\":5000.24\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -75,11 +85,11 @@
 		{
 			"name": "Eliminar producto",
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":1\r\n}",
+					"raw": "{\r\n    \"id\":10\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,6 +104,72 @@
 					"port": "3001",
 					"path": [
 						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener todas las categorias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/productos/categorias",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						"categorias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener todos los estados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/productos/estados",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						"estados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 10,\r\n  \"nombre\": \"midudev\",\r\n  \"sku\": 7,\r\n  \"precio\": 11323,\r\n  \"categoria\": \"Escritura\",\r\n  \"descripcion\": \"holamundo\",\r\n  \"estado\": \"Habilitado\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/productos/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"productos",
+						"create"
 					]
 				}
 			},
